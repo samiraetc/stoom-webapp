@@ -1,0 +1,105 @@
+<div class="container-fluid">
+  <div class="row  justify-content-center align-items-center" style="height:80vh">
+    <div class="col-md-12">
+      <div class="card teste">
+
+        <mat-card class="example-card container justify-property-center ">
+
+          <mat-horizontal-stepper linear #stepper>
+
+            <mat-step [stepControl]="firstFormGroup">
+              <form [formGroup]="firstFormGroup">
+                <ng-template matStepLabel>Nome</ng-template>
+                <mat-form-field>
+                  <input matInput placeholder="Nome" formControlName="firstCtrl">
+                </mat-form-field>
+                <div>
+                  <button mat-raised-button matStepperNext color="primary" (click)="getAllPizzaSize()" >Próximo</button>
+                </div>
+              </form>
+            </mat-step>
+
+            <mat-step [stepControl]="segundoFormGroup">
+              <form [formGroup]="segundoFormGroup">
+                <ng-template matStepLabel>Tamanho</ng-template>
+                <label id="example-radio-group-label">Escolha seu tamanho favorito </label> <br />
+                <mat-radio-group class="example-radio-button" formControlName="secondCtrl">
+                  <mat-radio-button *ngFor="let print of pizzaSize$ | async" [value]="print.size">
+                  <img src="../../../assets/img/{{print.image}}" style="width: 80px"><a>{{print.size}}</a>
+                  </mat-radio-button>
+                </mat-radio-group>
+                <div>
+                  <button class="example-margin" mat-raised-button matStepperPrevious>Voltar</button>
+                  <button mat-raised-button matStepperNext color="primary" (click)="getAllPizzaDough()">Próximo</button>
+                </div>
+              </form>
+            </mat-step>
+
+            <mat-step [stepControl]="terceiroFormGroup">
+              <form [formGroup]="terceiroFormGroup">
+                <ng-template matStepLabel>Massa</ng-template>
+                <label id="example-radio-group-label">Escolha sua massa favorita </label> <br />
+                <mat-radio-group formControlName="thirdCtrl">
+
+                  <mat-radio-button class="example-radio-button"
+                  *ngFor="let pizzaDough of pizzaDough$ | async"
+                  [value]="pizzaDough.dough">
+                 {{pizzaDough.dough}}
+                  </mat-radio-button>
+                </mat-radio-group>
+                <div>
+                  <button class="example-margin" mat-raised-button matStepperPrevious>Voltar</button>
+                  <button mat-raised-button matStepperNext color="primary" (click)="getAllPizzaIngredient()" (click)="getFindIDWeekPromo()">Próximo</button>
+                </div>
+              </form>
+            </mat-step>
+
+            <mat-step [stepControl]="quartoFormGroup">
+              <form [formGroup]="quartoFormGroup">
+                <ng-template matStepLabel>Recheio</ng-template>
+                <label id="example-radio-group-label">Escolha seu recheio favorito </label> <br />
+                <mat-radio-group formControlName="fourthCtrl">
+
+                  <label id="example-radio-group-label">Nossa recomendação do dia: </label> <br />
+                  <mat-radio-button [value]="weekPromo$" [value]="promo">
+                    {{ weekPromo$.day | async }} : <br />{{weekPromo$.promo | async }} 
+                  </mat-radio-button>
+                  
+                  <label id="example-radio-group-label">Nossos outros sabores: </label> <br />
+
+                <mat-list role="list" style="align-items: center; display: inline-block;">
+                  <mat-list-item role="listitem" *ngFor="let pizzaIngredient of pizzaIngredient$ | async; let i = index">
+
+                    <mat-radio-button [value]="pizzaIngredient.items" [value]="i">
+                      <b>{{ pizzaIngredient.name }}:</b>{{pizzaIngredient.items }} 
+                    </mat-radio-button>
+
+                  </mat-list-item>
+                  </mat-list>
+                </mat-radio-group>
+
+                <div>
+                  <button class="example-margin" mat-raised-button matStepperPrevious >Voltar</button>
+                  <button mat-raised-button matStepperNext color="primary" (click)="save()">Finalizar Pedido</button>
+                </div>
+              </form>
+            </mat-step>
+
+            <mat-step>
+              <ng-template matStepLabel></ng-template>
+                Obrigada por realizar seu pedido.
+              <div>
+                <button class="example-margin" mat-raised-button matStepperPrevious >Voltar </button>
+                <button mat-button (click)="stepper.reset()">Resetar</button>
+              </div>
+            </mat-step>
+
+          </mat-horizontal-stepper>
+
+
+
+        </mat-card>
+
+      </div>
+    </div>
+  </div>
