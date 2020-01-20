@@ -76,7 +76,7 @@ export class CreateYourOwnPizzaComponent implements OnInit {
 
   getFindIDWeekPromo() {
     this.day = new Date().getDay().toString();
-    this.weekPromo$ = this.weekPromoService.findById(this.day);
+    this.weekPromoService.findById(this.day).subscribe(console.log);
   }
 
   save(): void {

@@ -60,12 +60,9 @@
                 <label id="example-radio-group-label">Escolha seu recheio favorito </label> <br />
                 <mat-radio-group formControlName="fourthCtrl">
 
-                  <label id="example-radio-group-label">Nossa recomendação do dia: </label> <br />
-                  <mat-radio-button [value]="weekPromo$" [value]="promo">
-                    {{ weekPromo$.day | async }} : <br />{{weekPromo$.promo | async }} 
-                  </mat-radio-button>
-                  
-                  <label id="example-radio-group-label">Nossos outros sabores: </label> <br />
+                
+                 
+
 
                 <mat-list role="list" style="align-items: center; display: inline-block;">
                   <mat-list-item role="listitem" *ngFor="let pizzaIngredient of pizzaIngredient$ | async; let i = index">
